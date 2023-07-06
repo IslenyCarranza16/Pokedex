@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+   
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+   <link rel="stylesheet" src="./style.css">
+   <style>
+    body{
+        background-image: url(https://sg.portal-pokemon.com/play/resources/pokedex/img/list_top_bg.jpg);
+    background-size: 100%;
+    }
+    header{
+    background-color: white;
+    z-index: 1000;
+    padding: 0;
+    
+    height: 70px;
+    display: flex;
+    align-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+    justify-content: space-around;
+
+    }
+    #containerimagen{
+        display: flex;
+    }
+
+    .carrusel{height: 300px;
+    display: flex;
+align-items: flex-start;}
+    #imagenPokemonitem{
+           width: 50%;
+    position: absolute;
+    bottom: 70px;
+    }
+    #fondopokemon{
+        width: 40%;
+        position: absolute;
+        top: 20px;
+    }
+    #fondopokemon0{
+        width: 50%;
+    }
+   
+    #titulo{
+        display: flex;
+
+    }
+    .carousel-item.active {
+    display: flex;
+    justify-content: space-around}
+    .contenedorimagen{
+
+        align-content: flex-start;
+
+    }
+
+    #leyendaprincipal{
+        margin-top: 10px;
+    }
+  
+    .carousel-caption {
+        bottom: -5%;
+    }
+
+    #nombrePokemon{
+        font-size: 2rem;
+        margin-top: 20px;
+
+
+    }
+   .modal{
+    --bs-modal-width: 600px;
+    top: 50%;
+    right: 50%;
+    --bs-modal-bg: #0a141e;
+    --bs-modal-border:2.25px solid #466e9b;
+
+
+   }
+.modal-content{
+    color: white;
+    border: 2.25px solid #466e9b;
+}
+   
+
+   </style>
+</head>
+<body>
+   <header>
+    <div id="containerimagen">
+        <h1 id="titulo">
+            <img id="imagenpokemon" alt = "pokemon" src ="https://sg.portal-pokemon.com/img/common/logo.png" width="200">
+
+        </h1>
+ 
+    </div>
+   
+   </header>
+
+   <div id="contenedorCarrusel">
+
+     
+
+
+</div>
+
+
+
+
+    
+
+
+
+  <script type="module" src="./main.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
