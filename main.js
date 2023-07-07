@@ -34,11 +34,11 @@ const anotherfunction = async(urlAPI)=>{
     try{
     const datosTotales = await fecthData(urlAPI); // para sacar datos totales
     const nombrePokemon = await datosTotales.name; // para sacar nombre del pokemon ok
-    const tipoPokemon = await datosTotales.types.map((objeto)=>objeto.type.name); // tipo de pokemon ok
-    const habilidadesPokemon = await datosTotales.abilities.map((objeto)=>objeto.ability.name) //habilidades pokemon
+    const tipoPokemon = await datosTotales.types.map((objeto)=>objeto.type.name).join(' '); // tipo de pokemon ok
+    const habilidadesPokemon = await datosTotales.abilities.map((objeto)=>objeto.ability.name).join(' - ') //habilidades pokemon
     const altura = await datosTotales.height; // sacar la altura 
     const peso = await datosTotales.weight; // sacar el peso
-    const movimientosPokemon = await datosTotales.moves.map((objeto)=>objeto.move.name).slice(0,3); // sacar movimientos los tres princiaples
+    const movimientosPokemon = await datosTotales.moves.map((objeto)=>objeto.move.name).slice(0,3).join(' - '); // sacar movimientos los tres princiaples
     
     const imagenPokemon = await datosTotales.sprites.other.home.front_default; // obtener imagen ok
 
