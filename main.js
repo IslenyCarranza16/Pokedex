@@ -1,11 +1,3 @@
-// instalado el paquete de fecth
-
-
-//import fetch from 'node-fetch';  //esto no es necesario desde el browse
-
-const imagen = 'official-artwork';
-
-const contenedorCarrusel = document.querySelector('.slide');
 
 const API = 'https://pokeapi.co/api/v2/pokemon/';
 /* const options = {
@@ -16,103 +8,221 @@ const API = 'https://pokeapi.co/api/v2/pokemon/';
 	}
 }; */
 
-const valores = [1,2,3,4,5];
-
-for (let valor of valores){
-
-    async function fecthData (urlAPI){
-
-   
-        const response = await fetch(urlAPI); 
-        const data= await response.json(); //  esto es lo que se ponìa en el .then  lo que va hacer de retornar datos
-        return data
-    }
 
 
-    const anotherfunction = async(urlAPI)=>{
-        try{
-    
-        const datosTotales = await fecthData(`${urlAPI}${valor}`); // para sacar datos totales
-        const id = await datosTotales.id; // para sacar datos totales
-        const nombrePokemon = await datosTotales.name; // para sacar nombre del pokemon ok
-        const tipoPokemon = await datosTotales.types.map((objeto)=>objeto.type.name).join(' '); // tipo de pokemon ok
-        const habilidadesPokemon = await datosTotales.abilities.map((objeto)=>objeto.ability.name).join(' - ') //habilidades pokemon
-        const altura = await datosTotales.height; // sacar la altura 
-        const peso = await datosTotales.weight; // sacar el peso
-        const movimientosPokemon = await datosTotales.moves.map((objeto)=>objeto.move.name).slice(0,3).join(' - '); // sacar movimientos los tres princiaples
-       
-        const imagenPokemon = await datosTotales.sprites.other.home.front_default; // obtener imagen ok
-   
-    
-       contenedorCarrusel.innerHTML=" ";
-       contenedorCarrusel.innerHTML=
-       ` <div id="contenedorFinal" class="carousel-inner">
-       <div id ="containerdelaImagen" class="carousel-item active contenedorimagen">
-       <img id="fondopokemon0" src="https://sg.portal-pokemon.com/play/resources/pokedex/img/pokemon_bg.png" alt="nombrePokemon"> 
-       <img id="fondopokemon" src="https://sg.portal-pokemon.com/play/resources/pokedex/img/pokemon_circle_bg.png" alt="nombrePokemon"> 
-       <img id="imagenPokemonitem" src='${imagenPokemon}' alt="${nombrePokemon}" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
-       <div class="carousel-caption  d-md-block" id="leyendaprincipal">
-           <h5 id="nombrePokemon">Name : ${nombrePokemon}</h5>
-           <p id="tipoPokemon">Type: ${tipoPokemon}</p>
-         </div>
-
-         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-           <div class="modal-dialog">
-             <div class="modal-content">
-               <div class="modal-header">
-                 <h1 class="modal-title fs-5" id="exampleModalLabel">Pokemon Features</h1>
-                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div>
-               <div class="modal-body">
-                 <p>Height: ${altura}</p>
-                 <p>Weight: ${peso}</p>
-                 <p>Moves: ${movimientosPokemon} </p>
-                 <p>Abilities: ${habilidadesPokemon}</p>
-               </div>
-               <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-             </div>
-           </div>
-           </div>
-           </div>`
-       
-              
-    
-        }
-        catch(error){
-            console.log(error);
-    
-        }
-      
-    
-    }
-    
-    anotherfunction(API);
+function fecthPokemon(){
+const promises = [];
+for (let i = 1; i <= 500; i++){
+ promises.push( fetch(`${API}${i}`).then(response =>response.json())
+ );
 }
+Promise.all(promises).then((results) => {
+    const pokemon = results.map((result) => ({
+        id: result.id,
+        name: result.name,
+        image: result.sprites.other.home.front_default,
+        type: result.types.map((type) => type.type.name).join(', '),
+        abilities: result.abilities.map((objeto)=>objeto.ability.name).join(', '),
+        height: result.height,
+        weight: result.weight,
+        moves: result.moves.map((objeto)=>objeto.move.name).slice(0,3).join(', '),
+        namefilter: result.name.toLowerCase()
+    }));
+  console.log(pokemon);
 
-   
+  displayPokemon(pokemon)
+ 
+
+  filtroName.addEventListener('submit',filtrarNombre);
+
+  function filtrarNombre(event){
+    event.preventDefault();
+    
+ const nombreFiltrado = filtroName.nombre.value.toLowerCase();
+
+ const pokemonesFiltrados = pokemon.filter((poke) =>
+ poke.namefilter.includes(nombreFiltrado)
+);
+console.log(pokemonesFiltrados)
+
+ if(pokemonesFiltrados.length>0){
+    nombrePokemon.innerText = `Name : ${pokemonesFiltrados[0].name}`;
+  tipoPokemon.innerText = `Type: ${pokemonesFiltrados[0].type}`;
+  currentOptionImage.style.backgroundImage = "url(" + pokemonesFiltrados[0].image + ")";
+  mainMenu.style.background = color_options[0];
+  altura.innerHTML = `Height: ${pokemonesFiltrados[0].height}`;
+  peso.innerHTML = `Height: ${pokemonesFiltrados[0].weight}`;
+  movimientos.innerHTML = `Height: ${pokemonesFiltrados[0].moves}`;
+  habilidades.innerHTML = `Height: ${pokemonesFiltrados[0].abilities}`;
+  filtroName.reset()
+ }
+ else
+{
+    alert("vuelva intentarlo")
+    filtroName.reset()
+ }
+
+ 
+  }
+
 
   
+
+});
+
+};
+
+fecthPokemon();
+
+function displayPokemon(pokemon){
+
+  nombrePokemon.innerText = `Name : ${pokemon[j].name}`;
+  tipoPokemon.innerText = `Type: ${pokemon[j].type}`;
+  currentOptionImage.style.backgroundImage = "url(" + pokemon[j].image + ")";
+  mainMenu.style.background = color_options[j];
+  altura.innerHTML = `Height: ${pokemon[j].height}`;
+  peso.innerHTML = `Height: ${pokemon[j].weight}`;
+  movimientos.innerHTML = `Height: ${pokemon[j].moves}`;
+  habilidades.innerHTML = `Height: ${pokemon[j].abilities}`;
+
+
+
+  optionNext.onclick = function () {
+    j = j + 1;
+    j = j % pokemon.length;
+    nombrePokemon.dataset.nextText = pokemon[j].name;
+  
+    tipoPokemon.dataset.nextText = pokemon[j].type;
+  
+    mainMenu.style.background = color_options[j];
+    carousel.classList.add("anim-next");
+    
+    setTimeout(() => {
+      currentOptionImage.style.backgroundImage = "url(" + pokemon[j].image + ")";
+    }, 455);
+    
+    setTimeout(() => {
+    nombrePokemon.innerHTML = `Name : ${pokemon[j].name}`;
+  tipoPokemon.innerHTML = `Type: ${pokemon[j].type}`;
+      carousel.classList.remove("anim-next");
+      altura.innerHTML = `Height: ${pokemon[j].height}`;
+      peso.innerHTML = `Height: ${pokemon[j].weight}`;
+      movimientos.innerHTML = `Height: ${pokemon[j].moves}`;
+      habilidades.innerHTML = `Height: ${pokemon[j].abilities}`;
+    }, 650);
+  };
+  
+  optionPrevious.onclick = function () {
+    if (j === 0) {
+      j =  pokemon.length;
+    }
+    j = j - 1;
+    nombrePokemon.dataset.previousText = pokemon[j].name;
+  
+    tipoPokemon.dataset.previousText = pokemon[j].type;
+  
+    mainMenu.style.background = color_options[j];
+    carousel.classList.add("anim-previous");
+  
+    setTimeout(() => {
+      currentOptionImage.style.backgroundImage = "url(" + pokemon[j].image + ")";
+    }, 455);
+    
+    setTimeout(() => {
+        nombrePokemon.innerHTML = `Name : ${pokemon[j].name}`;
+        tipoPokemon.innerHTML = `Type: ${pokemon[j].type}`;
+      carousel.classList.remove("anim-previous");
+      altura.innerHTML = `Height: ${pokemon[j].height}`;
+      peso.innerHTML = `Height: ${pokemon[j].weight}`;
+      movimientos.innerHTML = `Height: ${pokemon[j].moves}`;
+      habilidades.innerHTML = `Height: ${pokemon[j].abilities}`;
+    }, 650);
+  };
+}
+
+let color_options = [];
+while (color_options.length < 900) {
+    do {
+        var color = Math.floor((Math.random()*1000000)+1);
+    } while (color_options.indexOf(color) >= 0);
+    color_options.push("#" + ("000000" + color.toString(16)).slice(-6));
+}
+console.log(color_options);
+
+/* const color_options = ["#EBB9D2", "#FE9968", "#7FE0EB", "#6CE5B1","#f9d9f6","#fabada","#fd7ed2","#2b3c37","#0e1c1a","#c97c41","#62d0b3","#97f6b6","#e5e400","#fea000",
+"#fcfbff","#fcf6ff","#fef1ff","#ffedfc","#ffeaf8","#EBB9D2","#51702e","#97695a","#d0746a","#e1c0d5","#bb9e72","#ffb096","#f4ab85","#a88f57","#b76e72","#ca74a4","#669d31","#878c8f","#16e8be","#fefefe","#e39ade","#bec2a4","#e4c8c0","#d42d9c","#871161","#291f0d"];
+console.log(color_options.length) */
+  
+  
+  
+  
+  
+  
+  var j = 0;
+  const currentOptionText1 = document.getElementById("current-option-text1");
+  const currentOptionText2 = document.getElementById("current-option-text2");
+  const currentOptionImage = document.getElementById("image");
+  const carousel = document.getElementById("carousel-wrapper");
+  const mainMenu = document.getElementById("menu");
+  const optionPrevious = document.getElementById("previous-option");
+  const optionNext = document.getElementById("next-option");
+  const nombrePokemon = document.getElementById("nombrePokemon")
+  const tipoPokemon = document.getElementById("tipoPokemon")
+  const altura= document.getElementById("altura");
+  const peso= document.getElementById("peso");
+  const movimientos= document.getElementById("movimientos");
+  const habilidades= document.getElementById("habilidades");
+  const modal= document.querySelector(".modal")
+
+  const filtroName = document.getElementById("filtroNombre");
+
+
 
  
 
 
-
-   
-        
-   
-
+ /*  
+  optionNext.onclick = function () {
+    i = i + 1;
+    i = i % text1_options.length;
+    currentOptionText1.dataset.nextText = text1_options[i];
+  
+    currentOptionText2.dataset.nextText = text2_options[i];
+  
+    mainMenu.style.background = color_options[i];
+    carousel.classList.add("anim-next");
     
-
-
+    setTimeout(() => {
+      currentOptionImage.style.backgroundImage = "url(" + image_options[i] + ")";
+    }, 455);
     
-   
+    setTimeout(() => {
+      currentOptionText1.innerText = text1_options[i];
+      currentOptionText2.innerText = text2_options[i];
+      carousel.classList.remove("anim-next");
+    }, 650);
+  };
+  
+  optionPrevious.onclick = function () {
+    if (i === 0) {
+      i = text1_options.length;
+    }
+    i = i - 1;
+    currentOptionText1.dataset.previousText = text1_options[i];
+  
+    currentOptionText2.dataset.previousText = text2_options[i];
+  
+    mainMenu.style.background = color_options[i];
+    carousel.classList.add("anim-previous");
+  
+    setTimeout(() => {
+      currentOptionImage.style.backgroundImage = "url(" + image_options[i] + ")";
+    }, 455);
     
-
-
-
-
-
-
-
+    setTimeout(() => {
+      currentOptionText1.innerText = text1_options[i];
+      currentOptionText2.innerText = text2_options[i];
+      carousel.classList.remove("anim-previous");
+    }, 650);
+  };
+   */

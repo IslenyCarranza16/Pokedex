@@ -4,141 +4,352 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
-   
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-   <link rel="stylesheet" src="./style.css">
-   <style>
-    body{
-        background-image: url(https://sg.portal-pokemon.com/play/resources/pokedex/img/list_top_bg.jpg);
-    background-size: 100%;
-    }
-    header{
-    background-color: white;
-    z-index: 1000;
-    padding: 0;
-    
-    height: 70px;
-    display: flex;
-    align-content: center;
-        text-align: center;
-        flex-wrap: wrap;
-    justify-content: space-around;
+    <link rel="stylesheet" src="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Pokedex2</title>
+    <style>
+@import url("https://fonts.googleapis.com/css?family=Poppins|Lato|Roboto+Mono&display=swap");
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-image:url("https://www.pockettactics.com/wp-content/sites/pockettactics/2023/01/Pok%C3%A9mon-wallpapers-5.jpg");
+  font-family: "Helvetica Neue", "Roboto Mono", "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-    }
-    #containerimagen{
-        display: flex;
-    }
+* {
+  box-sizing: border-box;
+  outline: none;
+  user-select: none;
+}
 
-    .carrusel{height: 300px;
-    display: flex;
-align-items: flex-start;}
-    #imagenPokemonitem{
-           width: 50%;
-    position: absolute;
-    bottom: 70px;
-    }
-    #fondopokemon{
-        width: 40%;
-        position: absolute;
-        top: 20px;
-    }
-    #fondopokemon0{
-        width: 50%;
-    }
-   
-    #titulo{
-        display: flex;
+#carousel-wrapper {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#carousel-wrapper #menu {
+  height: 380px;
+  width: 720px;
+  overflow: hidden;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  transition: all 0.6s ease-in-out;
+}
+#carousel-wrapper #menu #current-option {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: translate(-25%, 0%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#carousel-wrapper #menu #current-option #current-option-text1 {
+  font-size: 2rem;
+  line-height: 3rem;
+  width: 300px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+#carousel-wrapper #menu #current-option #current-option-text1::before {
+  content: attr(data-next-text);
+  position: absolute;
+  transform: translate(0%, 380px);
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+#carousel-wrapper #menu #current-option #current-option-text1::after {
+  content: attr(data-previous-text);
+  position: absolute;
+  transform: translate(0%, -380px);
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+#carousel-wrapper #menu #current-option #current-option-text2 {
+  font-size: 0.8rem;
+  width: 220px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+#carousel-wrapper #menu #current-option #current-option-text2::before {
+  content: attr(data-next-text);
+  position: absolute;
+  transform: translate(0%, 380px);
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+#carousel-wrapper #menu #current-option #current-option-text2::after {
+  content: attr(data-previous-text);
+  position: absolute;
+  transform: translate(0%, -380px);
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+#carousel-wrapper #menu #previous-option {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  display: block;
+  cursor: pointer;
+  background: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'%3E%3C/polygon%3E%3C/svg%3E");
+  background-size: cover;
+  position: absolute;
+  transform: translate(310px, 50px);
+}
+#carousel-wrapper #menu #next-option {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  display: block;
+  cursor: pointer;
+  background: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'%3E%3C/polygon%3E%3C/svg%3E");
+  background-size: cover;
+  position: absolute;
+  transform: translate(310px, -50px) rotate(180deg);
+}
+#carousel-wrapper #image {
+  height: 240px;
+  width: 240px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 101;
+  position: absolute;
+  transform: translate(140px, 0);
+}
+#carousel-wrapper.anim-next {
+  pointer-events: none;
+}
+#carousel-wrapper.anim-next #current-option-text1 {
+  animation: next-text 0.65s 0.085s;
+}
+#carousel-wrapper.anim-next #current-option-text2 {
+  animation: next-text 0.65s 0.085s;
+}
+#carousel-wrapper.anim-next #previous-option {
+  animation: next-top-arrow 0.65s 0.085s;
+}
+#carousel-wrapper.anim-next #next-option {
+  animation: next-bottom-arrow 0.65s 0.085s;
+}
+#carousel-wrapper.anim-next #image {
+  animation: next-image 0.65s 0.085s;
+}
+#carousel-wrapper.anim-previous {
+  pointer-events: none;
+}
+#carousel-wrapper.anim-previous #current-option-text1 {
+  animation: previous-text 0.65s 0.085s;
+}
+#carousel-wrapper.anim-previous #current-option-text2 {
+  animation: previous-text 0.65s 0.085s;
+}
+#carousel-wrapper.anim-previous #previous-option {
+  animation: previous-top-arrow 0.65s 0.085s;
+}
+#carousel-wrapper.anim-previous #next-option {
+  animation: previous-bottom-arrow 0.65s 0.085s;
+}
+#carousel-wrapper.anim-previous #image {
+  animation: previous-image 0.65s 0.085s;
+}
 
-    }
-    .carousel-item.active {
-    display: flex;
-    justify-content: space-around}
-    .contenedorimagen{
-
-        align-content: flex-start;
-
-    }
-
-    #leyendaprincipal{
-        margin-top: 10px;
-    }
-  
-    .carousel-caption {
-        bottom: -5%;
-    }
-
-    #nombrePokemon{
-        font-size: 2rem;
-        margin-top: 20px;
-
-
-    }
-   .modal{
+.modal{
     --bs-modal-width: 600px;
     top: 50%;
     right: 50%;
-    --bs-modal-bg: #0a141e;
-    --bs-modal-border:2.25px solid #466e9b;
-
+    --bs-modal-bg:#b7b6d1;
+    --bs-modal-border:2.25px solid black;
+    --bs-modal-title-line-height: 2;
 
    }
-.modal-content{
-    color: white;
+
+   .modal-content{
+    color: black;
     border: 2.25px solid #466e9b;
 }
-   
 
-   </style>
+#cabeza{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+#containerimagen{
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+@keyframes previous-text {
+  50%, 55% {
+    transform: translate(0%, 390px);
+  }
+  to {
+    transform: translate(0%, 380px);
+  }
+}
+@keyframes previous-top-arrow {
+  50% {
+    transform: translate(310px, 53px);
+  }
+}
+@keyframes previous-bottom-arrow {
+  50% {
+    transform: translate(310px, -47px) rotate(180deg);
+  }
+}
+@keyframes previous-image {
+  0% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(140px, 0) scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes next-text {
+  50%, 55% {
+    transform: translate(0%, -390px);
+  }
+  to {
+    transform: translate(0%, -380px);
+  }
+}
+@keyframes next-top-arrow {
+  50% {
+    transform: translate(310px, 47px);
+  }
+}
+@keyframes next-bottom-arrow {
+  50% {
+    transform: translate(310px, -53px) rotate(180deg);
+  }
+}
+@keyframes next-image {
+  0% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(140px, 0) scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+    </style>
 </head>
 <body>
-   <header>
+   <div id ="cabeza">
     <div id="containerimagen">
         <h1 id="titulo">
-            <img id="imagenpokemon" alt = "pokemon" src ="https://sg.portal-pokemon.com/img/common/logo.png" width="200">
+            <img id="imagenpokemon" alt = "pokemon" src ="https://sg.portal-pokemon.com/img/common/logo.png" width="300">
 
         </h1>
  
     </div>
-   
-   </header>
 
-   <div id="contenedorCarrusel">
-
-     <div id="carouselExample" class="carousel slide carrusel">
-   
-        
-  
-         
-      
-   
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-   
-</div>
-
+    <div id ="barraBusqueda">
+        <form id="filtroNombre" class="d-flex" role="search">
+            <input  name ="nombre" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-danger" type="submit">Search your Pokemon</button>
+          </form>
+    </div>
 
 </div>
 
 
 
 
-    
+
+    <div id="carousel-wrapper">
+        <div id="menu">
+            <div id="current-option">
+              <span id="current-option-text1" data-previous-text="" data-next-text="">
+                <h1 id="nombrePokemon" data-previous-text="" data-next-text=""> </h1>
+                <p id="tipoPokemon" data-previous-text="" data-next-text="" ></p>
+              </span>
+              <span id="current-option-text2" data-previous-text="" data-next-text="">
 
 
+              </span>
+            </div>
+            <button id="previous-option"></button>
+            <button id="next-option"></button>
+        </div>
+        <div id="image" data-bs-toggle="modal" data-bs-target="#exampleModal"></div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Pokemon Features</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p id="altura">Height: </p>
+                  <p id="peso">Weight: </p>
+                  <p id="movimientos">Moves:  </p>
+                  <p id="habilidades">Abilities: </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                 </div>
+              </div>
+            </div>
+            </div>
 
-  <script type="module" src="./main.js"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+      </div>
+
+      <script type="module" src="./main.js"></script> 
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
 </body>
 </html>
-
-
-
-
