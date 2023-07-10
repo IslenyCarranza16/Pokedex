@@ -157,6 +157,15 @@ body {
   position: absolute;
   transform: translate(140px, 0);
 }
+
+
+#botonesFiltrado{
+  display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
 #carousel-wrapper.anim-next {
   pointer-events: none;
 }
@@ -345,6 +354,41 @@ body {
               </div>
             </div>
             </div>
+
+      </div>
+
+
+      <div id="botonesFiltrado">
+
+        <div id = "grupo1">
+ <button id="normal"  type="button" class="btn btn-primary">Normal</button>
+<button id="fighting" type="button" class="btn btn-secondary">Fighting</button>
+<button id="flying"  type="button" class="btn btn-success">Flying</button>
+<button id="poison"  type="button" class="btn btn-danger">Poison</button>
+<button id="ground"   type="button" class="btn btn-info">Ground</button>
+<button id="rock" type="button" class="btn btn-light">Rock</button>
+<button id="bug" type="button" class="btn btn-dark">Bug</button>
+<button id="ghost" type="button" class="btn btn-primary">Ghost</button>
+<button  id="steel" type="button" class="btn btn-secondary">Steel</button>
+<button id="fire" type="button" class="btn btn-success">Fire</button>
+
+        </div>
+
+        <div id ="grupo2">
+          <button id="water" type="button" class="btn btn-success">Water</button>
+          <button id="grass" type="button" class="btn btn-danger">Grass</button>
+          <button id="electric" type="button" class="btn btn-warning">Electric</button>
+          <button id="psychic" type="button" class="btn btn-info">Psychic</button>
+          <button id="ice" type="button" class="btn btn-light">Ice</button>
+          <button id="dragon" type="button" class="btn btn-dark">Dragon</button>
+          <button id="dark" type="button" class="btn btn-primary">Dark</button>
+          <button id="fairy" type="button" class="btn btn-secondary">Fairy</button>
+         
+          
+        
+        </div>
+        <button  id="deleteFilter" type="button" class="btn btn-link">Delete filter</button>
+
 
       </div>
 

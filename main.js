@@ -1,5 +1,7 @@
 
+
 const API = 'https://pokeapi.co/api/v2/pokemon/';
+const APITipos = 'https://pokeapi.co/api/v2/type'
 /* const options = {
 	method: 'GET',
 	headers: {
@@ -7,6 +9,12 @@ const API = 'https://pokeapi.co/api/v2/pokemon/';
 		'X-RapidAPI-Host': 'pokedex2.p.rapidapi.com'
 	}
 }; */
+ const tipos = [];
+
+
+
+
+
 
 
 
@@ -62,11 +70,179 @@ console.log(pokemonesFiltrados)
     filtroName.reset()
  }
 
+
+
+ 
  
   }
 
+  function fechtDataTipo (urltipos){
+    return fetch(urltipos);
+   
+  
+  }
+  fechtDataTipo(APITipos).
+  then(response => response.json()).
+  then(product=>{
+  const arrayresultado = product.results
+  for (let resultado of arrayresultado){
+    tipos.push(resultado.name)
+  }
+  console.log(tipos)
+  
+
 
   
+  } )
+  
+  filtroNormal.addEventListener('click', ()=>{
+    const pokemonesFiltradosnormal = pokemon.filter((poke) =>
+ poke.type.includes(tipos[0])
+);
+displayPokemon(pokemonesFiltradosnormal)
+  })
+
+  filtroNormal.addEventListener('click', ()=>{
+    const pokemonesFiltradosnormal = pokemon.filter((poke) =>
+ poke.type.includes(tipos[0])
+);
+displayPokemon(pokemonesFiltradosnormal)
+  })
+  
+  fighting.addEventListener('click', ()=>{
+    const pokemonesFiltradosfighting = pokemon.filter((poke) =>
+ poke.type.includes(tipos[1])
+);
+displayPokemon(pokemonesFiltradosfighting)
+  })
+
+  flying.addEventListener('click', ()=>{
+    const pokemonesFiltradosflying = pokemon.filter((poke) =>
+ poke.type.includes(tipos[2])
+);
+displayPokemon(pokemonesFiltradosflying)
+  })
+
+  poison.addEventListener('click', ()=>{
+    const pokemonesFiltradospoison = pokemon.filter((poke) =>
+ poke.type.includes(tipos[3])
+);
+displayPokemon(pokemonesFiltradospoison)
+  })
+
+  ground.addEventListener('click', ()=>{
+    const pokemonesFiltradosground = pokemon.filter((poke) =>
+ poke.type.includes(tipos[4])
+);
+displayPokemon(pokemonesFiltradosground)
+  })
+
+  rock.addEventListener('click', ()=>{
+    const pokemonesFiltradosrock = pokemon.filter((poke) =>
+ poke.type.includes(tipos[5])
+);
+displayPokemon(pokemonesFiltradosrock)
+  })
+
+  bug.addEventListener('click', ()=>{
+    const pokemonesFiltradosbug = pokemon.filter((poke) =>
+ poke.type.includes(tipos[6])
+);
+displayPokemon(pokemonesFiltradosbug)
+  })
+
+  ghost.addEventListener('click', ()=>{
+    const pokemonesFiltradosghost = pokemon.filter((poke) =>
+ poke.type.includes(tipos[7])
+);
+displayPokemon(pokemonesFiltradosghost)
+  })
+
+  steel.addEventListener('click', ()=>{
+    const pokemonesFiltradossteel = pokemon.filter((poke) =>
+ poke.type.includes(tipos[8])
+);
+displayPokemon(pokemonesFiltradossteel)
+  })
+
+  fire.addEventListener('click', ()=>{
+    const pokemonesFiltradosfire = pokemon.filter((poke) =>
+ poke.type.includes(tipos[9])
+);
+displayPokemon(pokemonesFiltradosfire)
+  })
+
+
+  water.addEventListener('click', ()=>{
+    const pokemonesFiltradoswater = pokemon.filter((poke) =>
+ poke.type.includes(tipos[10])
+);
+displayPokemon(pokemonesFiltradoswater)
+  })
+
+  grass.addEventListener('click', ()=>{
+    const pokemonesFiltradosgrass = pokemon.filter((poke) =>
+ poke.type.includes(tipos[11])
+);
+displayPokemon(pokemonesFiltradosgrass)
+  })
+
+  electric.addEventListener('click', ()=>{
+    const pokemonesFiltradoselectric = pokemon.filter((poke) =>
+ poke.type.includes(tipos[12])
+);
+displayPokemon(pokemonesFiltradoselectric)
+  })
+
+  psychic.addEventListener('click', ()=>{
+    const pokemonesFiltradospsychic = pokemon.filter((poke) =>
+ poke.type.includes(tipos[13])
+);
+displayPokemon(pokemonesFiltradospsychic)
+  })
+
+  ice.addEventListener('click', ()=>{
+    const pokemonesFiltradosice = pokemon.filter((poke) =>
+ poke.type.includes(tipos[14])
+);
+displayPokemon(pokemonesFiltradosice)
+  })
+
+  dragon.addEventListener('click', ()=>{
+    const pokemonesFiltradosdragon = pokemon.filter((poke) =>
+ poke.type.includes(tipos[15])
+);
+displayPokemon(pokemonesFiltradosdragon)
+  })
+
+  dark.addEventListener('click', ()=>{
+    const pokemonesFiltradosdark = pokemon.filter((poke) =>
+ poke.type.includes(tipos[16])
+);
+displayPokemon(pokemonesFiltradosdark)
+  })
+
+  fairy.addEventListener('click', ()=>{
+    const pokemonesFiltradosfairy = pokemon.filter((poke) =>
+ poke.type.includes(tipos[17])
+);
+displayPokemon(pokemonesFiltradosfairy)
+  })
+
+ 
+
+ 
+
+
+
+
+
+deleteFilter.addEventListener('click', ()=>{
+  displayPokemon(pokemon)
+})
+
+
+
 
 });
 
@@ -173,9 +349,29 @@ console.log(color_options.length) */
   const movimientos= document.getElementById("movimientos");
   const habilidades= document.getElementById("habilidades");
   const modal= document.querySelector(".modal")
-
   const filtroName = document.getElementById("filtroNombre");
+  const filtroNormal = document.getElementById('normal');
+  const deleteFilter = document.getElementById('deleteFilter');
+  
+  const fighting = document.getElementById('fighting');
+  const flying = document.getElementById('flying');
+  const poison = document.getElementById('poison');
+  const ground = document.getElementById('ground');
+  const rock = document.getElementById('rock');
+  const bug = document.getElementById('bug');
+  const ghost = document.getElementById('ghost');
+  const steel = document.getElementById('steel');
+  const fire = document.getElementById('fire');
+  const water = document.getElementById('water');
+  const grass = document.getElementById('grass');
+  const electric = document.getElementById('electric');
+  const psychic = document.getElementById('psychic');
+  const ice = document.getElementById('ice');
+  const dragon = document.getElementById('dragon');
+  const dark = document.getElementById('dark');
+  const fairy = document.getElementById('fairy');
 
+ 
 
 
  
